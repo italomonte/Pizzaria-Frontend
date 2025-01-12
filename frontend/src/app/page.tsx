@@ -19,7 +19,7 @@ export default function Home() {
             type="email"
             required
             name="email"
-            placeholder='Digite seu email...'
+            placeholder='Digite seu email'
             className={styles.input}
             />
 
@@ -27,7 +27,7 @@ export default function Home() {
             type="password"
             required
             name="password"
-            placeholder='Digite seu email...'
+            placeholder='Digite sua senha'
             className={styles.input}
             />
 
