@@ -1,5 +1,4 @@
-
-import styles from '../page.module.scss'
+import styles from './page.module.scss'
 import logo from '/public/logo.svg'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,7 +19,7 @@ export default function SignUp() {
         console.log(password)
         
         if (name == "" || email === "" || password === "") {
-            console.log("preencha todos os campos")
+            return
         }
 
         else {
