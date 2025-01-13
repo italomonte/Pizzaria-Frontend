@@ -1,0 +1,62 @@
+.container{
+    max-width: 720px;
+    margin: 20px auto;
+    padding: 0 16px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    h1 {
+        color: var(--white);
+    }
+
+}
+
+.containerHeader{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    margin-top: 32px;
+
+    button {
+        background: transparent;
+        border: 0;
+        transition: transform 0.3s;
+        margin-top: 5px;
+        &:hover {
+            transform: rotate(-90deg);
+        }
+    }
+}
+
+.listOrders {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.orderItem{
+    display: flex;
+    background-color: var(--dark-900);
+    align-items: center;
+    border: 0;
+    font-size: 18px;
+    border-radius: 8px;
+    color: var(--white);
+    transition: filter 0.3s;
+
+    &:hover {
+        filter: brightness(1.2);
+    }
+}
+
+.tag{
+    width: 9px;
+    height: 60px;
+    background: var(--green-900);
+    border-radius: 6px 0 0 6px;
+    margin-right: 16px;
+}
