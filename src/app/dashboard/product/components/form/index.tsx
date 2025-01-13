@@ -6,6 +6,8 @@ import { UploadCloud } from "lucide-react"
 import { useState } from "react"
 import Image from "next/image"
 import {Button} from "@/app/dashboard/components/button"
+import { api } from "@/services/app"
+import { getCookieClient } from "@/lib/cookieClient"
 
 interface CategoryProp{
     id: string, 
@@ -21,8 +23,40 @@ export function Form({categories}: Props) {
     const [image, setImage] = useState<File>() // to store and upload no backend after
     const [previewImage, setPreviewImage] = useState("") // to show in the preview
 
-    async function handleRegisterProcuct() {
-        
+    async function handleRegisterProcuct(formData: FormData) {
+
+        const categoryIndex = formData.get("category")
+        const name = formData.get("name")
+        const price = formData.get("price")
+        const description = formData.get("description")
+
+        if (!name || !price || !categoryIndex || !description || !image ) {
+            return
+        }
+
+        const category_id = categories[Number(categoryIndex)].id
+
+        const data = new FormData()
+
+        data.append("name", name)
+        data.append("price", price)
+        data.append("description", description)
+        data.append("category_id", category_id)
+        data.append("file", image)
+
+        console.log("DATA:")
+        console.log(data.values)
+
+        const token = await getCookieClient()
+
+        await api.post("/product", data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+
+        console.log("cadastrado com sucesso")
     }
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
@@ -52,7 +86,6 @@ export function Form({categories}: Props) {
 
                     <input 
                     type="file"
-                    name=""
                     required
                     accept="image/png, image/jpeg"
                     onChange = {handleFile}
@@ -71,13 +104,11 @@ export function Form({categories}: Props) {
                 </label>
 
                 <select name="category">
-
                     {categories.map((category, index) => (
                         <option key={category.id} value={index}>
                             {category.name}
                         </option>
                     ))}
->
                 </select>
 
                 <input
@@ -91,16 +122,16 @@ export function Form({categories}: Props) {
                 <input
                     type="text"
                     name="price"
-                    placeholder="Digite o nome do produto"
+                    placeholder="Digite o preço do produto"
                     required
                     className={styles.input}
                 />
 
                 <textarea 
-                name="description" 
-                placeholder="Digite a descrição do produto"
-                required
-                className={styles.input}
+                    name="description" 
+                    placeholder="Digite a descrição do produto"
+                    required
+                    className={styles.input}
                 />
                 
                 <Button
