@@ -5,11 +5,21 @@ import styles from "./styles.module.scss"
 import { UploadCloud } from "lucide-react" 
 import { useState } from "react"
 import Image from "next/image"
+import {Button} from "@/app/dashboard/components/button"
 
-export function Form() {
+interface CategoryProp{
+    id: string, 
+    name: string
+}
 
-    const [image, setImage] = useState<File>()
-    const [previewImage, setPreviewImage] = useState("")
+interface Props {
+    categories: CategoryProp[] 
+}
+
+export function Form({categories}: Props) {
+
+    const [image, setImage] = useState<File>() // to store and upload no backend after
+    const [previewImage, setPreviewImage] = useState("") // to show in the preview
 
     async function handleRegisterProcuct() {
         
@@ -59,6 +69,43 @@ export function Form() {
                         />
                     )}
                 </label>
+
+                <select name="category">
+
+                    {categories.map((category, index) => (
+                        <option key={category.id} value={index}>
+                            {category.name}
+                        </option>
+                    ))}
+>
+                </select>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Digite o nome do produto"
+                    required
+                    className={styles.input}
+                />
+                
+                <input
+                    type="text"
+                    name="price"
+                    placeholder="Digite o nome do produto"
+                    required
+                    className={styles.input}
+                />
+
+                <textarea 
+                name="description" 
+                placeholder="Digite a descrição do produto"
+                required
+                className={styles.input}
+                />
+                
+                <Button
+                    text="Cadastrar"
+                />
 
             </form>
         </main>
