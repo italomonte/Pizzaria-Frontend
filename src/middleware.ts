@@ -7,9 +7,7 @@ export async function middleware(req: NextRequest) {
 
     const { pathname } = req.nextUrl
 
-    if (pathname.startsWith("/_next") || pathname === "/")  {
-        console.log("passou no middleware")
-
+    if (pathname.startsWith("/_next") || pathname === "/" || pathname === "/signup")  {
         return NextResponse.next()
     } else {
         const token = await getCookiesServer()

@@ -6,6 +6,8 @@ import { OrderProps } from "@/lib/order.type"
 import { ModalOrder } from "../modal"
 import {use} from "react"
 import { OrderContext } from "@/providers/order" // para consumir o pcontext
+import { stringify } from "querystring"
+
 interface Props {
     orders: OrderProps[] 
 }
@@ -13,6 +15,10 @@ interface Props {
 export function Orders({orders} : Props){
 
     const {isOpen, onRequestOpen} = use(OrderContext)
+    
+    function handleDetailOrder(order_id: string) {
+        onRequestOpen(order_id)
+    }
 
     return(
         <>
@@ -28,7 +34,9 @@ export function Orders({orders} : Props){
                     {orders.map((order) => (
                         <button
                         key={order.id}
-                        className={styles.orderItem}>
+                        className={styles.orderItem}
+                        onClick={() => handleDetailOrder(order.id)}
+                        >
                             <div className={styles.tag}></div>
                             <span>{order.table} - {order.name}</span>
                         </button>

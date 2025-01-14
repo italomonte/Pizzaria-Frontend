@@ -1,4 +1,4 @@
-import styles from './page.module.scss'
+import styles from '../page.module.scss'
 import logo from '/public/logo.svg'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -21,23 +21,21 @@ export default function SignUp() {
         if (name == "" || email === "" || password === "") {
             return
         }
+        
+        try {
+            await api.post("/users", {
+                name, 
+                email,
+                password
+            })
 
-        else {
-            try {
-                await api.post("/users", {
-                    name, 
-                    email,
-                    password
-                })
-
-            } catch (error) {
-                console.log("error:" )
-                console.log(error)
-                
-            }
-
-            redirect("/")
+        } catch (error) {
+            console.log("error:" )
+            console.log(error)
+            
         }
+
+        redirect("/")
     }
 
     return(
@@ -54,7 +52,7 @@ export default function SignUp() {
 
           <form action={handleRegister}>
 
-          <input 
+            <input 
             type="text"
             required
             name="name"

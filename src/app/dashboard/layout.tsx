@@ -5,8 +5,10 @@ export default function DashboardLayout ({children} :
 ) {
     return (
         <>
-        <Header/>
-        {children}
+        <OrderProvider>
+            <Header/>
+            {children}
+        </OrderProvider>
         </>
     )
 }
