@@ -5,14 +5,14 @@ import { OrderDetailProps } from "@/lib/orderDetail.type";
 
 import { createContext, ReactNode, useState } from "react";
 import { api } from "@/services/app";
-import { headers } from "next/headers";
 import { getCookieClient } from "@/lib/cookieClient";
 
 
 type OrderContextData = {
     isOpen: boolean
-    onRequestOpen: (order_id: string) => void;
+    onRequestOpen: (order_id: string) => Promise<void>;
     onRequestClose: () => void;
+    order: OrderDetailProps[];
 }
 
 type OrderProviderProps = {
@@ -39,8 +39,7 @@ export function OrderProvider({children}: OrderProviderProps){
             }
         })
 
-        console.log(response.data)
-
+        setOrder(response.data)
         setIsOpen(true)
     }
 
@@ -54,6 +53,7 @@ export function OrderProvider({children}: OrderProviderProps){
     isOpen,
     onRequestOpen,
     onRequestClose,
+    order
    }}
    >
     {children}

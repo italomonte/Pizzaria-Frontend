@@ -6,7 +6,7 @@ import { OrderContext } from "@/providers/order" // para consumir o pcontext
 
 export function ModalOrder(){
 
-  const {onRequestClose} = use(OrderContext)
+  const {onRequestClose, order} = use(OrderContext)
 
   return(
    <dialog className={styles.dialogContainer}>
@@ -22,18 +22,15 @@ export function ModalOrder(){
                 <h2>Detalhes do pedido</h2>
 
                 <span className={styles.table}>
-                    Mesa <b>36</b>
+                    Mesa <b>{order[0].order.table}</b>
                 </span>
 
-                <section className={styles.item}>
-                    <span>1 - <b>Pizza fango com catupiry</b></span>
-                    <span className={styles.description}>Pizza fango com catupiry, borda recheada</span>
-                </section>
-
-                <section className={styles.item}>
-                    <span>1 - <b>Pizza fango com catupiry</b></span>
-                    <span className={styles.description}>Pizza fango com catupiry, borda recheada</span>
-                </section>
+                {order.map((item) => (
+                    <section key={item.id} className={styles.item}>
+                        <span>{item.amount} - <b>{item.product.name}</b></span>
+                        <span className={styles.description}>{item.product.description}</span>
+                    </section>
+                ))}
                 
             </article>
 
