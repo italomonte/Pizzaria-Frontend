@@ -1,13 +1,19 @@
+"use client"
+
 import styles from "./sytles.module.scss"
 import { RefreshCcw } from "lucide-react"
 import { OrderProps } from "@/lib/order.type"
 import { ModalOrder } from "../modal"
-
+import {use} from "react"
+import { OrderContext } from "@/providers/order" // para consumir o pcontext
 interface Props {
     orders: OrderProps[] 
 }
 
 export function Orders({orders} : Props){
+
+    const {isOpen, onRequestOpen} = use(OrderContext)
+
     return(
         <>
             <main className={styles.container}>
@@ -29,8 +35,9 @@ export function Orders({orders} : Props){
                     ))}
                 </section>
             </main>
+            
+            {isOpen && <ModalOrder/> }
 
-            <ModalOrder/>
         </>
     )
 }

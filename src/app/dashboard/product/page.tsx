@@ -10,7 +10,6 @@ export default async function Product() {
     const response = await api.get("/category", {
         headers: {
             Authorization: `Bearer ${token}`
-
         }
     })
 
