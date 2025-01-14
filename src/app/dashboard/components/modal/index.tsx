@@ -6,7 +6,12 @@ import { OrderContext } from "@/providers/order" // para consumir o pcontext
 
 export function ModalOrder(){
 
-  const {onRequestClose, order} = use(OrderContext)
+  const {onRequestClose, order, finishOrder} = use(OrderContext)
+
+    async function handleFinishOrder() {
+        finishOrder(order[0].order_id)
+        onRequestClose()
+    }
 
   return(
    <dialog className={styles.dialogContainer}>
@@ -25,6 +30,12 @@ export function ModalOrder(){
                     Mesa <b>{order[0].order.table}</b>
                 </span>
 
+                {order[0].order?.name && (
+                    <span className={styles.nameOrder}>
+                        <b>{order[0].order.name}</b>
+                    </span>
+                )}
+
                 {order.map((item) => (
                     <section key={item.id} className={styles.item}>
                         <span>{item.amount} - <b>{item.product.name}</b></span>
@@ -34,7 +45,10 @@ export function ModalOrder(){
                 
             </article>
 
-            <button className={styles.buttonOrder}>
+            <button 
+                className={styles.buttonOrder}
+                onClick={handleFinishOrder}
+                >
                 Concluir Pedido
             </button>
         </section>

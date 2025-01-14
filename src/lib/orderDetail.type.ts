@@ -20,7 +20,7 @@ export interface OrderDetailProps {
         table: number,
         status: boolean,
         draft: boolean,
-        name: string,
+        name: string | null,
         created_at: string,
         update_at: string
     }
