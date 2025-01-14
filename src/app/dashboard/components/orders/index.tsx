@@ -1,7 +1,12 @@
 import styles from "./sytles.module.scss"
 import { RefreshCcw } from "lucide-react"
+import { OrderProps } from "@/lib/order.type"
 
-export function Orders(){
+interface Props {
+    orders: OrderProps[] 
+}
+
+export function Orders({orders} : Props){
     return(
         <main className={styles.container}>
             <section className={styles.containerHeader}>
@@ -12,15 +17,12 @@ export function Orders(){
             </section>
 
             <section className={styles.listOrders}>
-                <button className={styles.orderItem}>
-                    <div className={styles.tag}></div>
-                    <span>Mesa 10</span>
-                </button>
-
-                <button className={styles.orderItem}>
-                    <div className={styles.tag}></div>
-                    <span>Mesa 7</span>
-                </button>
+                {orders.map((order) => (
+                    <button  className={styles.orderItem}>
+                        <div className={styles.tag}></div>
+                        <span>{order.name}</span>
+                    </button>
+                ))}
             </section>
         </main>
     )
