@@ -12,7 +12,9 @@ async function getOrders(): Promise<OrderProps[] | []> {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        })
+        }) 
+        
+        console.log( response.data)
 
         return response.data || []
 
@@ -25,7 +27,6 @@ async function getOrders(): Promise<OrderProps[] | []> {
 export default async function Dashboard() {
 
     const orders = await getOrders();
-
     return (
         <>
             <Orders

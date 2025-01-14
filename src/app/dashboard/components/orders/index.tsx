@@ -18,9 +18,11 @@ export function Orders({orders} : Props){
 
             <section className={styles.listOrders}>
                 {orders.map((order) => (
-                    <button  className={styles.orderItem}>
+                    <button
+                    key={order.id}
+                    className={styles.orderItem}>
                         <div className={styles.tag}></div>
-                        <span>{order.name}</span>
+                        <span>{order.table} - {order.name}</span>
                     </button>
                 ))}
             </section>
