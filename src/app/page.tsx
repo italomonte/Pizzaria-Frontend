@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { api } from '@/services/app'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+import { toast } from 'sonner'
 
 export default function Home() {
 
@@ -14,8 +15,7 @@ export default function Home() {
     const email = formData.get("email")
     const password = formData.get("password")
 
-
-    if (email == "" || password === ""){
+    if (email === "" || password === ""){
       return
     }
 

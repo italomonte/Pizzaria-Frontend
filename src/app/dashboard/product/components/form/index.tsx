@@ -8,6 +8,9 @@ import Image from "next/image"
 import {Button} from "@/app/dashboard/components/button"
 import { api } from "@/services/app"
 import { getCookieClient } from "@/lib/cookieClient"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+
 
 interface CategoryProp{
     id: string, 
@@ -19,7 +22,7 @@ interface Props {
 }
 
 export function Form({categories}: Props) {
-
+    const router = useRouter()
     const [image, setImage] = useState<File>() // to store and upload no backend after
     const [previewImage, setPreviewImage] = useState("") // to show in the preview
 
@@ -31,6 +34,7 @@ export function Form({categories}: Props) {
         const description = formData.get("description")
 
         if (!name || !price || !categoryIndex || !description || !image ) {
+            toast.success("Preencha todos os campos")
             return
         }
 
@@ -44,8 +48,6 @@ export function Form({categories}: Props) {
         data.append("category_id", category_id)
         data.append("file", image)
 
-        console.log("DATA:")
-        console.log(data.values)
 
         const token = await getCookieClient()
 
@@ -54,16 +56,23 @@ export function Form({categories}: Props) {
                 Authorization: `Bearer ${token}`
             }
         })
+        .catch((err)=>{
+            console.log(err)
+            toast.warning("Falha ao cadastra o produto.")
 
+            return
+        })
 
-        console.log("cadastrado com sucesso")
+        toast.success("Produto registrado com sucesso")
+        router.push("/dashboard")
     }
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const image = e.target.files[0]
             if (image.type !== "image/jpeg" && image.type !== "image/png") {
-                console.log("formato proibido") 
+                toast.warning("Formato não permitido")
+
                 return
             }
 
