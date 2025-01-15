@@ -4,7 +4,6 @@ import {use} from "react"
 import { OrderContext } from "@/providers/order" // para consumir o pcontext
 import { calculateTotalOrder } from "@/lib/helper"
 
-
 export function ModalOrder(){
 
   const {onRequestClose, order, finishOrder} = use(OrderContext)
@@ -38,6 +37,7 @@ export function ModalOrder(){
 
                 {order.map((item) => (
                     <section key={item.id} className={styles.item}>
+                        {/* <Image width={120} height={120} src={item.product.banner} alt="imagem do produto" /> */}
                         <span>Qtd: {item.amount} - <b>{item.product.name} R${item.product.price}</b></span>
                         <span className={styles.description}>{item.product.description}</span>
                     </section>
@@ -45,7 +45,7 @@ export function ModalOrder(){
                 
             </article>
 
-            <span className={styles.totalOrder}>Total: R$: {calculateTotalOrder(order)}</span>
+            <span className={styles.totalOrder}>Total: R$:  {calculateTotalOrder(order)}</span>
 
             <button 
                 className={styles.buttonOrder}

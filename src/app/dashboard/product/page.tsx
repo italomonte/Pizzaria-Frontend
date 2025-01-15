@@ -13,7 +13,6 @@ export default async function Product() {
         }
     })
 
-    console.log(response.data)
 
     // buscar os dados da cotegorias pelo servidor e mandar pro componente via props
     return (

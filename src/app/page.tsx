@@ -28,7 +28,6 @@ export default function Login() {
         return
       }
 
-      console.log(response)
 
       const expressTime = 60 * 60 * 24 * 1000 // 24hrs
       const cookieStore = await cookies()

@@ -13,10 +13,7 @@ export default function SignUp() {
         const name = formaData.get("name")
         const email = formaData.get("email")
         const password = formaData.get("password")
-        
-        console.log(name)
-        console.log(email)
-        console.log(password)
+
         
         if (name == "" || email === "" || password === "") {
             return
