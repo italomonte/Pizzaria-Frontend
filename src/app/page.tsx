@@ -53,6 +53,7 @@ export default function Login() {
         <Image
           src={logo}
           alt="Logo Pizzaria"
+          width={700}
         />
 
         <section className={styles.login}>
