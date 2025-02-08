@@ -14,7 +14,7 @@ export function Button( {text}: Props) {
     return(
         <button type="submit" disabled={pending} className={styles.button}>
             
-            {pending ? "Carregando..." : text}
+            {pending ? "Loading..." : text}
             
         </button>
     )

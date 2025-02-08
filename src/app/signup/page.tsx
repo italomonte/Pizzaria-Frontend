@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { api } from '@/services/app'
 import { redirect } from 'next/navigation'
+import { toast } from 'sonner'
 
 export default function SignUp() {
 
@@ -29,7 +30,6 @@ export default function SignUp() {
         } catch (error) {
             console.log("error:" )
             console.log(error)
-            
         }
 
         redirect("/")
@@ -40,12 +40,12 @@ export default function SignUp() {
         <div className={styles.containerCenter}>
         <Image
           src={logo}
-          alt="Logo Pizzaria"
+          alt="Pizzeria Logo"
         />
 
         <section className={styles.login}>
 
-            <h1>Criando sua conta</h1>
+            <h1>Creating your account</h1>
 
           <form action={handleRegister}>
 
@@ -53,7 +53,7 @@ export default function SignUp() {
             type="text"
             required
             name="name"
-            placeholder='Digite seu nome...'
+            placeholder='Enter your name...'
             className={styles.input}
             />
 
@@ -61,7 +61,7 @@ export default function SignUp() {
             type="email"
             required
             name="email"
-            placeholder='Digite seu email...'
+            placeholder='Enter your email...'
             className={styles.input}
             />
 
@@ -74,12 +74,12 @@ export default function SignUp() {
             />
 
             <button type="submit">
-              Cadastrar
+              Sign Up
             </button>
           </form>
 
           <Link href="/" className={styles.text}>
-            Já possui uma conta? Faça login
+            Already have an account? Log in
           </Link>
 
         </section>

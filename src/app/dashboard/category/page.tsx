@@ -35,7 +35,7 @@ export default async function Category(){
 
     return(
         <main className={styles.container}>
-            <h1>Nova Category</h1>
+            <h1>New Category</h1>
 
             <form 
             action= {handleRegisterCategory}
@@ -43,12 +43,12 @@ export default async function Category(){
                 <input 
                 type="text" 
                 name="name"
-                placeholder="Nome da categoria, ex: Pizzas"
+                placeholder="Category Name, ex: Pizzas"
                 className={styles.input}
                 />
 
                 <Button
-                    text="Cadastrar"
+                    text="Register"
                 />
             </form>
         </main>

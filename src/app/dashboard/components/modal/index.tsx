@@ -23,7 +23,7 @@ export function ModalOrder(){
             </button>
 
             <article className={styles.container}>
-                <h2>Detalhes do pedido</h2>
+                <h2>Order Details</h2>
 
                 <span className={styles.table}>
                     Mesa <b>{order[0].order.table}</b>
@@ -38,20 +38,20 @@ export function ModalOrder(){
                 {order.map((item) => (
                     <section key={item.id} className={styles.item}>
                         {/* <Image width={120} height={120} src={item.product.banner} alt="imagem do produto" /> */}
-                        <span>Qtd: {item.amount} - <b>{item.product.name} R${item.product.price}</b></span>
+                        <span>Amount: {item.amount} - <b>{item.product.name} R${item.product.price}</b></span>
                         <span className={styles.description}>{item.product.description}</span>
                     </section>
                 ))}
                 
             </article>
 
-            <span className={styles.totalOrder}>Total: R$:  {calculateTotalOrder(order)}</span>
+            <span className={styles.totalOrder}>Total $:  {calculateTotalOrder(order)}</span>
 
             <button 
                 className={styles.buttonOrder}
                 onClick={handleFinishOrder}
                 >
-                Concluir Pedido
+                Finish Order
             </button>
         </section>
    </dialog>

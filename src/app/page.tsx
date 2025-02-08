@@ -8,13 +8,13 @@ import { cookies } from 'next/headers'
 
 export default function Login() {
 
-  async function handleLogin(formData:FormData) {
+  async function handleLogin(formData: FormData) {
     "use server" 
     
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const email = formData.get("email")?.toString().trim()
+    const password = formData.get("password")?.toString().trim()
 
-    if (email === "" || password === ""){
+    if (!email || !password) {
       return
     }
 
@@ -24,10 +24,9 @@ export default function Login() {
         password
       })
 
-      if(!response.data.token) {
+      if (!response.data.token) {
         return
       }
-
 
       const expressTime = 60 * 60 * 24 * 1000 // 24hrs
       const cookieStore = await cookies()
@@ -37,15 +36,15 @@ export default function Login() {
         path: "/",
         httpOnly: false,
         secure: process.env.NODE_ENV === "production" 
-        
       })
+
+
     } catch (error) {
-      console.log(error)
+      console.error("Login error:", error)
       return
     }
     
     redirect("/dashboard")
-
   }
 
   return (
@@ -53,38 +52,37 @@ export default function Login() {
       <div className={styles.containerCenter}>
         <Image
           src={logo}
-          alt="Logo Pizzaria"
+          alt="Pizzeria Logo"
           width={500}
         />
         <br />
 
         <section className={styles.login}>
-          <form action= {handleLogin}>
+          <form action={handleLogin}>
             <input 
-            type="email"
-            required
-            name="email"
-            placeholder='Digite seu email'
-            className={styles.input}
+              type="email"
+              required
+              name="email"
+              placeholder='Enter your email'
+              className={styles.input}
             />
 
             <input 
-            type="password"
-            required
-            name="password"
-            placeholder='Digite sua senha'
-            className={styles.input}
+              type="password"
+              required
+              name="password"
+              placeholder='Enter your password'
+              className={styles.input}
             />
 
             <button type="submit">
-              Acessar
+              Access
             </button>
           </form>
 
           <Link href="/signup" className={styles.text}>
-            Não possui uma conta? Cadastre-se
+            Don't have an account? Sign up
           </Link>
-
         </section>
       </div>
     </>
