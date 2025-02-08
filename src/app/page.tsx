@@ -36,7 +36,8 @@ export default function Login() {
         maxAge: expressTime,
         path: "/",
         httpOnly: false,
-        secure: process.env.NODE_ENV === "production"
+        secure: process.env.NODE_ENV === "production" 
+        
       })
     } catch (error) {
       console.log(error)
