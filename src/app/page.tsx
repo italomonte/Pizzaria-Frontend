@@ -53,8 +53,9 @@ export default function Login() {
         <Image
           src={logo}
           alt="Logo Pizzaria"
-          width={700}
+          width={500}
         />
+        <br />
 
         <section className={styles.login}>
           <form action= {handleLogin}>
