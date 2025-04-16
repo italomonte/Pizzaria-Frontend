@@ -18,11 +18,11 @@ type OrderContextData = {
     finishOrder: (oder_id: string) => Promise<void>
 }
 
+export const OrderContext = createContext({} as OrderContextData)
+
 type OrderProviderProps = {
     children: ReactNode;
 }
-
-export const OrderContext = createContext({} as OrderContextData)
 
 export function OrderProvider({children}: OrderProviderProps){
 
@@ -30,16 +30,16 @@ export function OrderProvider({children}: OrderProviderProps){
     const [isOpen, setIsOpen] = useState(false)
     const [order, setOrder] = useState<OrderDetailProps[]>([])
 
-    async function onRequestOpen(order_id: string) {
+    async function onRequestOpen(job_id: string) {
 
         const token = await getCookieClient()
 
-        const response = await api.get("/order/detail", {
+        const response = await api.get("/api/vagas/vaga", {
             headers: {
                 Authorization: `Bearer ${token}`
             },
             params: {
-                order_id
+                job_id
             }
         })
 

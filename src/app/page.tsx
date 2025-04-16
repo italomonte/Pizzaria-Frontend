@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { api } from '@/services/app'
 import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
+import { cookies } from 'next/headers' 
 
 export default function Login() {
 
